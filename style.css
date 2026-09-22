@@ -121,4 +121,49 @@ canvas {
     canvas {
         border-radius: 8px;
     }
+    #controls-panel {
+        display: none;
+    }
 }
+
+/* Controls & Calibration Panel */
+#controls-panel {
+    position: absolute;
+    top: 14px;
+    right: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 6px;
+    background: rgba(20, 20, 31, 0.75);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 8px 12px;
+    z-index: 15;
+}
+
+.control-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.control-item label {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--accent2);
+    letter-spacing: 0.5px;
+}
+
+.control-item input[type="range"] {
+    width: 90px;
+    cursor: pointer;
+    accent-color: var(--accent);
+}
+
+.control-hint {
+    font-size: 10px;
+    color: rgba(255, 255, 255, 0.5);
+}

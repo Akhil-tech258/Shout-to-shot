@@ -73,7 +73,34 @@
         }
     }
 
+    let micSensitivity = parseFloat(localStorage.getItem('shout_runner_sens') || '8.5');
+    let keyboardSimulatedVolume = 0;
+
+    const micSensSlider = document.getElementById('micSensSlider');
+    const sensValue = document.getElementById('sensValue');
+    if (micSensSlider && sensValue) {
+        micSensSlider.value = micSensitivity;
+        sensValue.textContent = micSensitivity + 'x';
+        micSensSlider.addEventListener('input', () => {
+            micSensitivity = parseFloat(micSensSlider.value);
+            sensValue.textContent = micSensitivity + 'x';
+            localStorage.setItem('shout_runner_sens', micSensitivity);
+        });
+    }
+
+    window.addEventListener('keydown', (e) => {
+        if (e.code === 'Space' || e.key === 'ArrowUp') {
+            keyboardSimulatedVolume = 0.88;
+        }
+    });
+    window.addEventListener('keyup', (e) => {
+        if (e.code === 'Space' || e.key === 'ArrowUp') {
+            keyboardSimulatedVolume = 0;
+        }
+    });
+
     function getMicVolume() {
+        if (keyboardSimulatedVolume > 0) return keyboardSimulatedVolume;
         if (!analyser || !micActive) return 0;
         const dataArray = new Float32Array(analyser.fftSize);
         analyser.getFloatTimeDomainData(dataArray);
@@ -82,7 +109,7 @@
             sumSquares += dataArray[i] * dataArray[i];
         }
         const rms = Math.sqrt(sumSquares / dataArray.length);
-        const amplified = Math.min(1, rms * 8.5);
+        const amplified = Math.min(1, rms * micSensitivity);
         return amplified;
     }
 

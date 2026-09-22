@@ -13,7 +13,21 @@
             <div id="volume-bar-fill"></div>
         </div>
         <div id="volume-label">🎤 VOICE VOLUME</div>
-        <div id="mic-error">🎤 Microphone access denied or not available.<br>Please allow microphone access and reload.</div>
+
+        <!-- Controls & Calibration Panel -->
+        <div id="controls-panel">
+            <div class="control-item">
+                <label for="micSensSlider">MIC GAIN: <span id="sensValue">8.5x</span></label>
+                <input type="range" id="micSensSlider" min="2" max="25" step="0.5" value="8.5">
+            </div>
+            <div class="control-hint">💡 Whisper = Walk • Shout = High Jump! (Or hold Spacebar)</div>
+        </div>
+
+        <div id="mic-error">
+            🎤 Microphone access denied or not available.<br>
+            Please allow microphone access and reload.<br><br>
+            <small style="color: #4ef08e;">(Or press <strong>Spacebar</strong> to play using keyboard!)</small>
+        </div>
     </div>
     <script src="script.js" defer></script>
 </body>
